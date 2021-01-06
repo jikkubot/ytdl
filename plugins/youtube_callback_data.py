@@ -10,7 +10,7 @@ from pyrogram import (Client,
                       InputMediaAudio)
 
 from helper.ffmfunc import duration
-from helper.ytdlfunc import downloadvideocli, downloadaudiocli
+from helper.ytdlfunc import downloadvideocli, downloadaudiocli, get_thumb
 
 
 @Client.on_callback_query()
@@ -89,10 +89,12 @@ async def catch_youtube_dldata(c, q):
 
     if cb_data.startswith("video"):
         filename = await downloadvideocli(video_command)
+        thumb = await get_thumb(filename)
         dur = round(duration(filename))
         med = InputMediaVideo(
             media=filename,
             duration=dur,
+            thumb=thumb,
             caption=os.path.basename(filename),
             supports_streaming=True
         )
