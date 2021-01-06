@@ -102,7 +102,7 @@ async def get_thumb(file_path):
     file_path = os.path.normpath(file_path)
     thumb_file = os.path.join(f'thumb_{time.time()}.jpeg')
     ffmpeg_cmd = f'ffmpeg -ss 30 -i "{file_path}" -vframes 1 -vf "scale=320:-1" -y "{thumb_file}"'
-    process = await asyncio.create_subprocess_exec(
+    process = await asyncio.create_subprocess_shell(
         ffmpeg_cmd,
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
