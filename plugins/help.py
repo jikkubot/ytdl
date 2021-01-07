@@ -1,7 +1,7 @@
 from pyrogram import Client, Filters, StopPropagation, InlineKeyboardButton, InlineKeyboardMarkup
 
 
-@Client.on_message(Filters.command(["help"]))
+@Client.on_message(Filters.command(["help"]), group=-2)
 async def start(client, message):
     # return
     joinButton = InlineKeyboardMarkup([
